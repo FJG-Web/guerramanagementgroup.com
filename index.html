@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guerra Management Group — Modernizing What Already Exists</title>
+<meta name="description" content="Guerra Management Group is a diversified holding company building specialized ventures across the modern web and the modern home." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,300..900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #050608;
+    --bg-elev: #0b0d12;
+    --bg-elev-2: #11141b;
+    --ink: #ecedf2;
+    --ink-dim: #9095a3;
+    --ink-faint: #555a68;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.16);
+    --accent: #7cf9b6;
+    --accent-2: #5ad7ff;
+    --accent-3: #ffb547;
+    --accent-signal: #ff5e3a;
+    --grad-1: radial-gradient(800px 500px at 15% 20%, rgba(124,249,182,0.16), transparent 60%);
+    --grad-2: radial-gradient(900px 600px at 85% 40%, rgba(90,215,255,0.13), transparent 60%);
+    --grad-3: radial-gradient(700px 500px at 50% 110%, rgba(255,181,71,0.10), transparent 60%);
+    --display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--display);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--grad-1), var(--grad-2), var(--grad-3);
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+  @keyframes drift {
+    0%   { transform: translate(0,0) scale(1); }
+    100% { transform: translate(-40px, 30px) scale(1.08); }
+  }
+
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    z-index: 1;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 90%);
+  }
+
+  main, header, footer { position: relative; z-index: 2; }
+
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 22px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(5,6,8,0.55);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-brand {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-brand .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--ink-dim);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a::before {
+    content: '0' counter(navcount) ' ─ ';
+    color: var(--ink-faint);
+    font-size: 11px;
+  }
+  .nav-links { counter-reset: navcount; }
+  .nav-links li { counter-increment: navcount; }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+  .nav-cta:hover {
+    background: var(--ink);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(124,249,182,0.2);
+  }
+
+  .hero {
+    min-height: 100vh;
+    padding: 160px 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hero-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .hero-meta .tick { color: var(--accent); }
+  .hero-meta .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--line-strong);
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 124px);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    max-width: 16ch;
+  }
+  .hero h1 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(110deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1em;
+  }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: end;
+    margin-top: 40px;
+  }
+  @media (max-width: 880px) {
+    .hero-bottom { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .hero-lede {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.45;
+    color: var(--ink-dim);
+    max-width: 54ch;
+  }
+  .hero-lede strong { color: var(--ink); font-weight: 500; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 16px 28px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover {
+    background: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(124,249,182,0.25);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn .arrow { transition: transform 0.3s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: rise 0.9s cubic-bezier(0.2,0.8,0.2,1) forwards;
+  }
+  .reveal.d1 { animation-delay: 0.1s; }
+  .reveal.d2 { animation-delay: 0.25s; }
+  .reveal.d3 { animation-delay: 0.4s; }
+  .reveal.d4 { animation-delay: 0.55s; }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .marquee {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    padding: 22px 0;
+    background: rgba(11,13,18,0.5);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    animation: scroll 40s linear infinite;
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+  }
+  .marquee-track span { display: flex; align-items: center; gap: 60px; }
+  .marquee-track .pip { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+  .marquee-track .pip.amber { background: var(--accent-3); }
+  .marquee-track .pip.cyan { background: var(--accent-2); }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  section {
+    padding: 140px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    max-width: 20ch;
+  }
+  .section-title em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .thesis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .thesis { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .thesis-prose p {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--ink-dim);
+    margin-bottom: 24px;
+  }
+  .thesis-prose p:first-child {
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .thesis-prose .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding-left: 24px;
+    margin: 36px 0;
+  }
+
+  .pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .pillar {
+    background: var(--bg-elev);
+    padding: 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    transition: background 0.3s ease;
+  }
+  .pillar:hover { background: var(--bg-elev-2); }
+  .pillar-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  .pillar-content h4 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .pillar-content p {
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .ventures-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 60px;
+    align-items: end;
+  }
+  @media (max-width: 880px) {
+    .ventures-intro { grid-template-columns: 1fr; gap: 30px; }
+  }
+  .ventures-tag {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    max-width: 42ch;
+  }
+
+  .ventures {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 1100px) {
+    .ventures { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .ventures { grid-template-columns: 1fr; }
+  }
+  .venture-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2,0.8,0.2,1);
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .venture-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .venture-card.sec::before { background: linear-gradient(90deg, transparent, var(--accent-2), transparent); }
+  .venture-card.realestate::before { background: linear-gradient(90deg, transparent, var(--accent-3), transparent); }
+  .venture-card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-4px);
+    background: var(--bg-elev-2);
+  }
+  .venture-card:hover::before { transform: translateX(100%); }
+
+  .venture-card .glow {
+    position: absolute;
+    top: -50%; right: -30%;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.22;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .venture-card:hover .glow { opacity: 0.4; }
+  .venture-card.dev .glow { background: var(--accent); }
+  .venture-card.sec .glow { background: var(--accent-2); }
+  .venture-card.realestate .glow { background: var(--accent-3); }
+
+  .venture-status {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    color: var(--ink-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .venture-status .s-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+  }
+  .venture-status.active { color: var(--accent); border-color: rgba(124,249,182,0.3); }
+  .venture-status.active .s-dot { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+  .venture-status.upcoming { color: var(--accent-3); border-color: rgba(255,181,71,0.3); }
+  .venture-status.upcoming .s-dot { background: var(--accent-3); box-shadow: 0 0 6px var(--accent-3); }
+
+  .venture-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  .venture-name {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .venture-name em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .venture-card.dev .venture-name em { color: var(--accent); }
+  .venture-card.sec .venture-name em { color: var(--accent-2); }
+  .venture-card.realestate .venture-name em { color: var(--accent-3); }
+  .venture-desc {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .venture-list { list-style: none; margin-bottom: 28px; }
+  .venture-list li {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.25s ease;
+  }
+  .venture-list li:last-child { border-bottom: 1px solid var(--line); }
+  .venture-list li::after {
+    content: '+';
+    color: var(--ink-faint);
+    transition: color 0.25s ease;
+    font-size: 14px;
+  }
+  .venture-card.dev .venture-list li:hover { color: var(--accent); }
+  .venture-card.sec .venture-list li:hover { color: var(--accent-2); }
+  .venture-card.realestate .venture-list li:hover { color: var(--accent-3); }
+  .venture-card.dev .venture-list li:hover::after { color: var(--accent); }
+  .venture-card.sec .venture-list li:hover::after { color: var(--accent-2); }
+  .venture-card.realestate .venture-list li:hover::after { color: var(--accent-3); }
+
+  .venture-cta {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-dim);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.25s ease, gap 0.25s ease;
+  }
+  .venture-card.dev .venture-cta:hover { color: var(--accent); gap: 14px; }
+  .venture-card.sec .venture-cta:hover { color: var(--accent-2); gap: 14px; }
+  .venture-card.realestate .venture-cta:hover { color: var(--accent-3); gap: 14px; }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  @media (max-width: 880px) {
+    .approach-grid { grid-template-columns: 1fr; }
+  }
+  .approach-item {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 48px 36px;
+    transition: background 0.3s ease;
+  }
+  .approach-item:hover { background: var(--bg-elev); }
+  .approach-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .approach-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+  .approach-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+  .approach-text {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .cta-block {
+    background: linear-gradient(135deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+    border: 1px solid var(--line);
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(600px 300px at 50% 0%, rgba(124,249,182,0.15), transparent 60%),
+      radial-gradient(400px 200px at 30% 100%, rgba(90,215,255,0.1), transparent 60%),
+      radial-gradient(400px 200px at 70% 100%, rgba(255,181,71,0.1), transparent 60%);
+    pointer-events: none;
+  }
+  .cta-block > * { position: relative; z-index: 2; }
+  .cta-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .cta-headline {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    max-width: 22ch;
+    margin-inline: auto;
+  }
+  .cta-headline em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .cta-sub {
+    color: var(--ink-dim);
+    font-size: 18px;
+    max-width: 52ch;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  footer {
+    padding: 60px 40px 40px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-elev);
+  }
+  .footer-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 880px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  .footer-brand {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .footer-brand em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+  }
+  .footer-tag {
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 38ch;
+  }
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col a {
+    color: var(--ink-dim);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.25s ease;
+  }
+  .footer-col a:hover { color: var(--accent); }
+
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-bottom .live {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+  }
+  .footer-bottom .live .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @media (max-width: 720px) {
+    .nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 20px; padding-right: 20px; }
+    .hero { padding-top: 120px; }
+    .cta-block { padding: 60px 24px; }
+    footer { padding: 40px 20px; }
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.2,0.8,0.2,1), transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .scroll-reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<nav class="nav">
+  <div class="nav-brand">
+    <span class="dot"></span>
+    Guerra Management Group
+  </div>
+  <ul class="nav-links">
+    <li><a href="#thesis">Thesis</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-meta reveal d1">
+      <span class="tick">●</span>
+      <span>Diversified Holding Company · Est. 2026</span>
+      <span class="divider"></span>
+      <span>Spotsylvania, VA</span>
+    </div>
+
+    <h1 class="reveal d2">
+      Modernizing what <em>already exists</em> — from old websites to old <em>homes</em>.
+    </h1>
+
+    <div class="hero-bottom">
+      <p class="hero-lede reveal d3">
+        Guerra Management Group is a diversified holding company building <strong>specialized ventures</strong> in two complementary domains: the modern web and the modern home. We invest in things that should still be here in twenty years — and bring them up to today's standards.
+      </p>
+      <div class="hero-actions reveal d4">
+        <a href="#ventures" class="btn btn-primary">
+          Our ventures <span class="arrow">→</span>
+        </a>
+        <a href="#thesis" class="btn btn-ghost">
+          Read the thesis
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Web Modernization</span><span class="pip"></span>
+      <span>Security Hardening</span><span class="pip cyan"></span>
+      <span>Home Modernization</span><span class="pip amber"></span>
+      <span>Structured Wiring</span><span class="pip amber"></span>
+      <span>Electrical Upgrades</span><span class="pip amber"></span>
+      <span>Performance Engineering</span><span class="pip"></span>
+      <span>Property Investment</span><span class="pip amber"></span>
+      <span>Web Modernization</span><span class="pip"></span>
+      <span>Security Hardening</span><span class="pip cyan"></span>
+      <span>Home Modernization</span><span class="pip amber"></span>
+      <span>Structured Wiring</span><span class="pip amber"></span>
+      <span>Electrical Upgrades</span><span class="pip amber"></span>
+      <span>Performance Engineering</span><span class="pip"></span>
+      <span>Property Investment</span><span class="pip amber"></span>
+    </div>
+  </div>
+
+  <section id="thesis">
+    <div class="section-label scroll-reveal">The Thesis</div>
+    <h2 class="section-title scroll-reveal">Most things don't need to be replaced. They need to be <em>brought forward.</em></h2>
+
+    <div class="thesis scroll-reveal">
+      <div class="thesis-prose">
+        <p>
+          A 1960s home with good bones doesn't need to be torn down — it needs modern wiring. A ten-year-old website with loyal customers doesn't need to be scrapped — it needs to be made fast, secure, and accessible.
+        </p>
+
+        <div class="pull">
+          "We invest in the gap between what exists and what's possible — and close it with craft."
+        </div>
+
+        <p>
+          Guerra Management Group exists to launch and operate independent LLCs — each focused on a single discipline within that gap. One venture rebuilds outdated websites. Another hardens the infrastructure those sites run on. A third acquires older homes and modernizes them for the way people actually live now: with structured network wiring, updated electrical, and the readiness to support whatever the next decade brings.
+        </p>
+
+        <p>
+          Different industries. Same philosophy: respect what's already here, and bring it up to today's standard.
+        </p>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar-num">01 / FOCUS</span>
+          <div class="pillar-content">
+            <h4>One discipline per venture.</h4>
+            <p>Each LLC is staffed by people who do that work — and only that work. No generalists, no scope drift.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">02 / CRAFT</span>
+          <div class="pillar-content">
+            <h4>Built to last decades, not quarters.</h4>
+            <p>Whether it's code or copper wire, we measure quality in years. Every project is built to hold up to inspection.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">03 / TRUST</span>
+          <div class="pillar-content">
+            <h4>Privacy &amp; transparency by default.</h4>
+            <p>Honest scopes, honest pricing, and infrastructure choices that respect the people who depend on it.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">04 / PATIENT</span>
+          <div class="pillar-content">
+            <h4>Long-horizon ownership.</h4>
+            <p>We hold ventures and properties for the long haul. Decisions are made for compounding value, not short-term flips.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ventures">
+    <div class="ventures-intro">
+      <div>
+        <div class="section-label scroll-reveal">The Portfolio</div>
+        <h2 class="section-title scroll-reveal">Two domains. <em>Three ventures.</em> One standard.</h2>
+      </div>
+      <p class="ventures-tag scroll-reveal">
+        Each venture under Guerra is its own LLC — independently operated, separately liable, unified by a shared commitment to durable work.
+      </p>
+    </div>
+
+    <div class="ventures">
+      <article class="venture-card dev scroll-reveal">
+        <div class="glow"></div>
+        <div class="venture-status active"><span class="s-dot"></span>Active</div>
+        <div>
+          <div class="venture-num">01 / WEB DEVELOPMENT</div>
+          <h3 class="venture-name">Modernizing the <em>web</em>, one site at a time.</h3>
+          <p class="venture-desc">
+            Rebuilding outdated, slow, and inaccessible websites into fast, responsive, future-ready experiences.
+          </p>
+        </div>
+        <div>
+          <ul class="venture-list">
+            <li>Full Site Redesigns</li>
+            <li>Performance &amp; Core Web Vitals</li>
+            <li>Accessibility &amp; SEO</li>
+            <li>CMS Migration</li>
+          </ul>
+          <a href="https://guerradigitalstudio.com" target="_blank" rel="noopener" class="venture-cta" style="color: var(--accent);">
+            Visit guerradigitalstudio.com →
+          </a>
+        </div>
+      </article>
+
+      <article class="venture-card sec scroll-reveal">
+        <div class="glow"></div>
+        <div class="venture-status upcoming"><span class="s-dot"></span>Q4 2026</div>
+        <div>
+          <div class="venture-num">02 / WEB SECURITY</div>
+          <h3 class="venture-name">Hardening the sites <em>businesses</em> rely on.</h3>
+          <p class="venture-desc">
+            Privacy-first security audits, monitoring, and infrastructure hardening — protecting the websites that already exist.
+          </p>
+        </div>
+        <div>
+          <ul class="venture-list">
+            <li>Security Audits</li>
+            <li>SSL &amp; Header Hardening</li>
+            <li>Privacy-First Email Stack</li>
+            <li>Ongoing Monitoring</li>
+          </ul>
+          <a href="#contact" class="venture-cta" style="color: var(--accent-2);">
+            Request an audit →
+          </a>
+        </div>
+      </article>
+
+      <article class="venture-card realestate scroll-reveal">
+        <div class="glow"></div>
+        <div class="venture-status upcoming"><span class="s-dot"></span>In Development 2027</div>
+        <div>
+          <div class="venture-num">03 / REAL ESTATE</div>
+          <h3 class="venture-name">Bringing older <em>homes</em> into the modern era.</h3>
+          <p class="venture-desc">
+            Acquiring older homes and modernizing the systems that matter — structured wiring, electrical, and connectivity for how people live now.
+          </p>
+        </div>
+        <div>
+          <ul class="venture-list">
+            <li>Property Acquisition</li>
+            <li>Structured Network Wiring</li>
+            <li>Electrical System Upgrades</li>
+            <li>Smart-Home Readiness</li>
+          </ul>
+          <a href="#contact" class="venture-cta" style="color: var(--accent-3);">
+            Stay informed →
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="section-label scroll-reveal">How We Operate</div>
+    <h2 class="section-title scroll-reveal">The same standard, <em>regardless</em> of what we're modernizing.</h2>
+
+    <div class="approach-grid scroll-reveal">
+      <div class="approach-item">
+        <div class="approach-num">01 / DIAGNOSE</div>
+        <svg class="approach-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="20" cy="20" r="12"/>
+          <path d="M30 30 L40 40"/>
+        </svg>
+        <h3 class="approach-title">Audit before action.</h3>
+        <p class="approach-text">
+          Every engagement starts with a thorough assessment — code, infrastructure, wiring, foundations. We document what exists before we touch anything.
+        </p>
+      </div>
+
+      <div class="approach-item">
+        <div class="approach-num">02 / MODERNIZE</div>
+        <svg class="approach-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M8 24 L16 16 L24 24 L32 16 L40 24"/>
+          <path d="M8 32 L16 24 L24 32 L32 24 L40 32" opacity="0.5"/>
+        </svg>
+        <h3 class="approach-title">Upgrade with intent.</h3>
+        <p class="approach-text">
+          We don't change what works. We strengthen what's weak, replace what's failing, and add what's missing — methodically and to current code.
+        </p>
+      </div>
+
+      <div class="approach-item">
+        <div class="approach-num">03 / FUTURE-PROOF</div>
+        <svg class="approach-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M24 6 L40 14 V26 C40 35 32 41 24 44 C16 41 8 35 8 26 V14 Z"/>
+          <path d="M18 24 L22 28 L30 20"/>
+        </svg>
+        <h3 class="approach-title">Built for what's next.</h3>
+        <p class="approach-text">
+          Cat6A in the walls. Modern panels and breakers. Hardened security headers. Decisions made today that won't need to be redone tomorrow.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cta-block scroll-reveal">
+      <div class="cta-eyebrow">Let's Talk</div>
+      <h2 class="cta-headline">Whether it's a <em>website</em> or a <em>house</em> — let's bring it forward.</h2>
+      <p class="cta-sub">
+        Tell us about the project, the property, or the problem. We'll route you to the right venture and follow up within one business day.
+      </p>
+      <div class="hero-actions" style="justify-content: center;">
+        <a href="mailto:support@guerramanagementgroup.com" class="btn btn-primary">
+          support@guerramanagementgroup.com <span class="arrow">→</span>
+        </a>
+        <a href="#" class="btn btn-ghost">
+          Schedule a call
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Guerra <em>Management</em> Group</div>
+      <p class="footer-tag">A diversified holding company modernizing what already exists — across the modern web and the modern home.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Ventures</h4>
+      <ul>
+        <li><a href="https://guerradigitalstudio.com" target="_blank" rel="noopener">Web Development ↗</a></li>
+        <li><a href="#ventures">Web Security</a></li>
+        <li><a href="#ventures">Real Estate</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#thesis">Thesis</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:support@guerramanagementgroup.com">Email</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Guerra Management Group. All rights reserved.</span>
+    <span class="live"><span class="dot"></span> System operational</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.scroll-reveal').forEach(el => io.observe(el));
+
+  const heroMeta = document.querySelector('.hero-meta');
+  if (heroMeta) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < 600) heroMeta.style.transform = `translateY(${y * 0.15}px)`;
+    });
+  }
+</script>
+
+</body>
+</html>
