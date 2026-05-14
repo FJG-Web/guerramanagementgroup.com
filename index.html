@@ -3,6 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ─────────── Security Headers (HTML-level) ─────────── -->
+<!-- Real HTTP headers will also be set by Cloudflare; these are meta-tag fallbacks. -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data: https:;
+  connect-src 'self' https://guerra-contact-api.vercel.app;
+  frame-ancestors 'none';
+  form-action 'self' https://guerra-contact-api.vercel.app;
+  base-uri 'self';
+  object-src 'none';
+  upgrade-insecure-requests;
+" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=(), midi=(), encrypted-media=(), display-capture=(), interest-cohort=()" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<!-- ─────────── End Security Headers ─────────── -->
 <title>Guerra Management Group Corp. — Building Systems People Rely On</title>
 <meta name="description" content="Guerra Management Group Corp. is a diversified holding company building specialized ventures across the modern web and the modern home — from new builds to modernization. Founded by a service-disabled veteran." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1146,7 +1166,7 @@
             <li>Accessibility &amp; SEO</li>
             <li>CMS Migration</li>
           </ul>
-          <a href="https://guerradigitalstudio.com" target="_blank" rel="noopener" class="venture-cta" style="color: var(--accent);">
+          <a href="https://guerradigitalstudio.com" target="_blank" rel="noopener noreferrer" class="venture-cta" style="color: var(--accent);">
             Visit guerradigitalstudio.com →
           </a>
         </div>
@@ -1285,7 +1305,7 @@
       <form
         class="contact-form"
         id="contactForm"
-        action="https://formspree.io/f/YOUR_FORM_ID"
+        action="https://guerra-contact-api.vercel.app/api/contact"
         method="POST"
       >
         <div class="form-row">
@@ -1349,7 +1369,7 @@
     <div class="footer-col">
       <h4>Ventures</h4>
       <ul>
-        <li><a href="https://guerradigitalstudio.com" target="_blank" rel="noopener">Web Development ↗</a></li>
+        <li><a href="https://guerradigitalstudio.com" target="_blank" rel="noopener noreferrer">Web Development ↗</a></li>
         <li><a href="#ventures">Web Security</a></li>
         <li><a href="#ventures">Real Estate</a></li>
       </ul>
