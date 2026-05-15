@@ -1442,10 +1442,23 @@
       submitBtn.innerHTML = 'Sending… <span class="arrow">→</span>';
 
       try {
+        // Collect form fields into a plain JSON payload
+        const payload = {
+          name:    form.name.value.trim(),
+          email:   form.email.value.trim(),
+          company: form.company.value.trim(),
+          venture: form.venture.value,
+          message: form.message.value.trim(),
+          _gotcha: form._gotcha?.value || ''
+        };
+
         const response = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
         });
 
         if (response.ok) {
@@ -1453,7 +1466,7 @@
           form.reset();
         } else {
           const data = await response.json().catch(() => ({}));
-          const msg = data.errors?.[0]?.message || 'Something went wrong. Please email us directly at support@guerramanagementgroup.com.';
+          const msg = data.error || 'Something went wrong. Please email us directly at support@guerramanagementgroup.com.';
           showStatus('error', msg);
         }
       } catch (err) {
