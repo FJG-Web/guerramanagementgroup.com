@@ -1,0 +1,9 @@
+# Guerra Management Group Corp.
+# Responsible Vulnerability Disclosure Policy
+# RFC 9116: https://www.rfc-editor.org/rfc/rfc9116.html
+
+Contact: mailto:security@guerramanagementgroup.com
+Expires: 2027-05-14T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.guerramanagementgroup.com/.well-known/security.txt
+Policy: https://www.guerramanagementgroup.com/security-policy
