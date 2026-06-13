@@ -1,0 +1,10 @@
+{
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://guerra-contact-api.vercel.app; form-action 'self' https://guerra-contact-api.vercel.app; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "geolocation=(), camera=(), microphone=(), payment=(), usb=()",
+    "X-Frame-Options": "DENY"
+  }
+}
