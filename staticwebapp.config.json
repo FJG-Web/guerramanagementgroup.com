@@ -1,10 +1,33 @@
 {
   "globalHeaders": {
-    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://guerra-contact-api.vercel.app; form-action 'self' https://guerra-contact-api.vercel.app; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self' data:; img-src 'self' data:; media-src 'self'; connect-src 'self' https://guerra-contact-api.vercel.app; form-action 'self' https://guerra-contact-api.vercel.app; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin",
     "Permissions-Policy": "geolocation=(), camera=(), microphone=(), payment=(), usb=()",
     "X-Frame-Options": "DENY"
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/assets/*",
+      "/*.css",
+      "/*.js",
+      "/*.json",
+      "/*.txt",
+      "/*.xml",
+      "/*.mp4",
+      "/*.webp",
+      "/*.jpg",
+      "/*.jpeg",
+      "/*.png",
+      "/*.svg",
+      "/*.ico",
+      "/*.woff2"
+    ]
+  },
+  "mimeTypes": {
+    ".webp": "image/webp",
+    ".mp4": "video/mp4"
   }
 }
