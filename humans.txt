@@ -4,11 +4,9 @@ Location: Spotsylvania, Virginia, United States
 Site: guerramanagementgroup.com
 
 /* SITE */
-Last update: 2026/05
+Last update: 2026/06
 Standards: HTML5, CSS3, ES2022
 Components: Bricolage Grotesque, Fraunces, JetBrains Mono
-Hosting: GitHub Pages
-Backend: Vercel + Proton SMTP
 
 /* THANKS */
 The veterans who served beside me.

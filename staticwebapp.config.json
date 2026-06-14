@@ -1,4 +1,7 @@
 {
+  "routes": [
+    { "route": "/security-policy", "rewrite": "/security-policy.html" }
+  ],
   "globalHeaders": {
     "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self' data:; img-src 'self' data:; media-src 'self'; connect-src 'self' https://guerra-contact-api.vercel.app; form-action 'self' https://guerra-contact-api.vercel.app; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
