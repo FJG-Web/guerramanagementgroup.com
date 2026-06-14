@@ -1,0 +1,19 @@
+# Secrets / environment — never commit these
+.env
+.env.*
+*.pem
+*.key
+
+# Dependencies / local tooling
+node_modules/
+.venv/
+
+# Logs & OS cruft
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
