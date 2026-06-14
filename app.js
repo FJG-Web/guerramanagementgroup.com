@@ -85,3 +85,51 @@ function showStatus(type, message) {
   status.textContent = message;
   status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+/* ============================================================
+   Enhancement: hero video + whisper micro-interactions
+   ============================================================ */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero background video: desktop + motion-allowed only.
+  // Phones (and reduced-motion) keep the lightweight poster — video never downloads.
+  var v = document.querySelector('.hero-video');
+  if (v && !reduce && window.matchMedia('(min-width: 768px)').matches) {
+    var s = document.createElement('source');
+    s.src = '/assets/hero-video.mp4';
+    s.type = 'video/mp4';
+    v.appendChild(s);
+    v.muted = true;
+    v.load();
+    var play = function () { var p = v.play(); if (p && p.catch) { p.catch(function () {}); } };
+    play();
+    document.addEventListener('click', play, { once: true });
+  }
+
+  // Nav gains presence after scrolling
+  var nav = document.querySelector('.nav');
+  if (nav) {
+    var onNavScroll = function () {
+      if (window.scrollY > 24) { nav.classList.add('scrolled'); }
+      else { nav.classList.remove('scrolled'); }
+    };
+    window.addEventListener('scroll', onNavScroll, { passive: true });
+    onNavScroll();
+  }
+
+  // Pointer-reactive glow drift on venture cards (whisper-level parallax)
+  if (!reduce && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.venture-card').forEach(function (card) {
+      var glow = card.querySelector('.glow');
+      if (!glow) { return; }
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+        var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        glow.style.transform = 'translate(' + (dx * 50).toFixed(1) + 'px,' + (dy * 50).toFixed(1) + 'px)';
+      });
+      card.addEventListener('pointerleave', function () { glow.style.transform = ''; });
+    });
+  }
+})();

@@ -989,3 +989,57 @@
 .venture-card.sec .venture-cta { color: var(--accent-2); }
 .venture-card.realestate .venture-cta { color: var(--accent-3); }
 .honeypot { display: none; }
+
+/* ============================================================
+   Enhancement: CSP-safe hero video + whisper micro-interactions
+   (self-hosted media, no inline styles, no CSP changes)
+   ============================================================ */
+html, body { overflow-x: hidden; }
+
+.hero { position: relative; }
+
+.hero-poster-pic,
+.hero-video,
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
+  pointer-events: none;
+}
+.hero-poster-pic { z-index: 0; display: block; }
+.hero-poster-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-video { z-index: 0; object-fit: cover; display: none; }
+.hero-video-overlay {
+  z-index: 1;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(7,8,11,0.30), transparent 60%),
+    linear-gradient(180deg, rgba(7,8,11,0.55) 0%, rgba(7,8,11,0.62) 45%, rgba(7,8,11,0.88) 100%);
+}
+
+/* Keep hero content above the media */
+.hero-meta, .hero h1, .hero-bottom { position: relative; z-index: 2; }
+
+/* Desktop: play the video, drop the mobile poster */
+@media (min-width: 768px) {
+  .hero-video { display: block; }
+  .hero-poster-pic { display: none; }
+}
+
+/* Micro-interaction: pointer-reactive glow drift on venture cards */
+.venture-card .glow { transition: opacity 0.4s ease, transform 0.35s cubic-bezier(0.2,0.8,0.2,1); }
+
+/* Micro-interaction: nav gains presence once scrolled */
+.nav { transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+.nav.scrolled {
+  background: rgba(5,6,8,0.82);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+/* Respect reduced-motion: no autoplaying video, keep the still */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none !important; }
+  .hero-poster-pic { display: block !important; }
+}
